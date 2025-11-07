@@ -7,6 +7,14 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
 
 export async function POST(request: NextRequest) {
   try {
+    // Vérifier que la clé Stripe est configurée
+    if (!process.env.STRIPE_SECRET_KEY) {
+      return NextResponse.json(
+        { error: 'Stripe secret key is not configured' },
+        { status: 500 }
+      )
+    }
+
     // Créer une session Stripe Checkout
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -33,8 +41,12 @@ export async function POST(request: NextRequest) {
       url: session.url 
     })
   } catch (error: any) {
+    console.error('Stripe error:', error)
     return NextResponse.json(
-      { error: error.message },
+      { 
+        error: error.message || 'An error occurred with our connection to Stripe',
+        details: process.env.NODE_ENV === 'development' ? error.stack : undefined
+      },
       { status: 500 }
     )
   }
