@@ -15,6 +15,14 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Obtenir l'URL de base (depuis la requête ou variable d'environnement)
+    const origin = request.headers.get('origin') || 
+                   request.headers.get('host') ? `https://${request.headers.get('host')}` : null ||
+                   process.env.NEXT_PUBLIC_APP_URL ||
+                   'https://cheatersreveal.vercel.app'
+    
+    const baseUrl = origin.startsWith('http') ? origin : `https://${origin}`
+
     // Créer une session Stripe Checkout
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -32,8 +40,8 @@ export async function POST(request: NextRequest) {
         },
       ],
       mode: 'payment',
-      success_url: `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/result?success=true`,
-      cancel_url: `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/payment?canceled=true`,
+      success_url: `${baseUrl}/result?success=true`,
+      cancel_url: `${baseUrl}/payment?canceled=true`,
     })
 
     return NextResponse.json({ 
