@@ -93,7 +93,7 @@ export default function SocialMedia() {
                   className={`gear-step ${index <= searchStep ? 'active' : ''} ${index < searchStep ? 'completed' : ''}`}
                 >
                   <div className="gear-icon">
-                    {index < searchStep ? '✅' : index === searchStep ? '⚙️' : '⏳'}
+                    {index < searchStep ? '✅' : index === searchStep ? (index === 2 ? '📍' : '⚙️') : '⏳'}
                   </div>
                   <div className="gear-text">{step.text}</div>
                   {index === searchStep && <div className="gear-spinner"></div>}
