@@ -6,12 +6,12 @@ Allez sur https://vercel.com/dashboard → Votre projet → Settings → Environ
 
 ### Variable 1 : STRIPE_SECRET_KEY
 - **Name:** `STRIPE_SECRET_KEY`
-- **Value:** `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`
+- **Value:** `VOTRE_CLE_SECRETE_STRIPE_LIVE` (voir fichier .env.local ou demander au développeur)
 - **Environments:** ✅ Production, ✅ Preview, ✅ Development
 
 ### Variable 2 : NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 - **Name:** `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`
-- **Value:** `pk_live_51SLuCVDS4Cbtb14QJUqIMvvH82D5raMBzOpr3B87AMl6JwSUz54NTcxsuUfYvpnA5ptARiJatHWiQ5zoFuaFdI3W00ovPuYMPM`
+- **Value:** `VOTRE_CLE_PUBLIQUE_STRIPE_LIVE` (voir fichier .env.local ou demander au développeur)
 - **Environments:** ✅ Production, ✅ Preview, ✅ Development
 
 ### Variable 3 : NEXT_PUBLIC_APP_URL
